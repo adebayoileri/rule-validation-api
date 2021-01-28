@@ -20,24 +20,24 @@ const validateReqBody = async (req, res, next) => {
       rule: Joi.object()
         .keys({
           field: Joi.string().required().messages({
-            "field.string": "field should be a string.",
-            "field.required": "field is required.",
+            "base.string": "field should be a string.",
+            "any.required": "field is required.",
           }),
           condition: Joi.string()
             .valid("eq", "neq", "gte", "gt", "contains")
             .required()
             .messages({
-              "condition.string": "condition should be a string.",
-              "condition.required": "condition is required.",
+              "base.string": "condition should be a string.",
+              "any.required": "condition is required.",
             }),
           condition_value: Joi.any().required().messages({
-            "condition_value.required": "condition_value is required.",
+            "base.required": "condition_value is required.",
           }),
         })
         .required()
         .messages({
-          "rule.object": "rule should be an object.",
-          "rule.required": "rule is required.",
+          "base.object": "rule should be an object.",
+          "any.required": "rule is required.",
         }),
       data: Joi.alternatives().try(
         Joi.string().required(),
