@@ -5,10 +5,14 @@
 
 import express from "express";
 import bodyParser from "body-parser";
-import { validateReqBody } from "./src/validations/validateReqBody";
-import checkNestedData from "./src/validations/checkNestedData";
+import {
+  validateReqBody,
+  checkNestedData,
+  validateRuleCondition,
+} from "./validations";
 
 const app = express();
+const PORT = process.env.PORT || 4200;
 
 // Handles invalid JSON Payload passed
 app.use((req, res, next) => {
@@ -25,13 +29,6 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/**
- * @name
- * @description
- * @requires
- * @returns
- */
-
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "My Rule-Validation API.",
@@ -46,8 +43,13 @@ app.get("/", (req, res) => {
   });
 });
 
-app.post("/validate-rule", validateReqBody, checkNestedData);
+app.post(
+  "/validate-rule",
+  validateReqBody,
+  checkNestedData,
+  validateRuleCondition
+);
 
-app.listen(4200, () => {
+app.listen(PORT, () => {
   console.log("server up and running");
 });

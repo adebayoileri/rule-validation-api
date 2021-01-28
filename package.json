@@ -1,13 +1,17 @@
 {
   "name": "rule-validation-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "a simple rule-validation API",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node app.js"
+    "start": "npm run build && node ./build/app.js",
+    "start:dev": "nodemon --exec babel-node ./src/app.js",
+    "build": "npm run clean && npm run build-babel",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s"
   },
   "keywords": [],
-  "author": "",
+  "author": "Adebayo Ilerioluwa",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.12.10",
